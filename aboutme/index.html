@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div id="cursor">
+        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+            <circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 8" />
+        </svg>
+    </div>
+
+    <main class="container">
+        <section class="card about">
+            <h2 class="about-title">Profile</h2>
+            <div class="about-media">
+                <img id="about-photo" src="" alt="Profile" class="about-photo" width="112" height="112" loading="lazy">
+            </div>
+            <div class="about-info">
+                <h1 id="about-name" class="about-name"></h1>
+                <div class="about-meta">
+                    <span id="about-city" class="tag"></span>
+                    <span id="about-age" class="tag"></span>
+                </div>
+                <p id="about-desc" class="about-desc"></p>
+            </div>
+        </section>
+
+        <section class="card skills">
+            <h2>Languages & Tools</h2>
+            
+            <ul id="skills-grid" class="skills-grid">
+            </ul>
+        </section>
+
+        <section class="card contact">
+            <h2>Contact Me</h2>
+            <div id="social-grid" class="social-grid">
+            </div>
+
+        </section>
+
+        <section class="card discord">
+            <div class="discord-header">
+                <img class="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Discord Avatar">
+                <div>
+                    <div class="discord-name">YourDiscord#1234</div>
+                    <div class="discord-status dnd">Do Not Disturb</div>
+                </div>
+            </div>
+            <p class="discord-note">Pings are silenced. I’ll reply when free.</p>
+        </section>
+
+        <section class="card servers">
+            <h2>My Servers</h2>
+            <br>
+            <div id="server-list" class="server-list"></div>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            var cursor = document.getElementById('cursor');
+            if (!cursor) return;
+
+            function showCursor() {
+                cursor.style.opacity = '1';
+            }
+
+            function hideCursor() {
+                cursor.style.opacity = '0';
+            }
+
+            window.addEventListener('mousemove', function (e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                showCursor();
+            }, { passive: true });
+
+            window.addEventListener('mouseenter', showCursor, { passive: true });
+            window.addEventListener('mouseleave', hideCursor, { passive: true });
+
+            window.addEventListener('mousedown', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            }, { passive: true });
+
+            window.addEventListener('mouseup', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, { passive: true });
+
+            hideCursor();
+        })();
+    </script>
+    <script>
+        (function () {
+            function $(sel) { return document.querySelector(sel); }
+            function create(tag, className) { var el = document.createElement(tag); if (className) el.className = className; return el; }
+            function setText(el, text) { el.textContent = text || ''; }
+
+            function render(cfg) {
+                if (!cfg) return;
+                var p = cfg.profile || {};
+                var nameEl = document.getElementById('about-name');
+                var cityEl = document.getElementById('about-city');
+                var ageEl = document.getElementById('about-age');
+                var descEl = document.getElementById('about-desc');
+                var photoEl = document.getElementById('about-photo');
+                if (nameEl) setText(nameEl, p.name);
+                if (cityEl) setText(cityEl, p.city ? ('City: ' + p.city) : '');
+                if (ageEl) setText(ageEl, (typeof p.age !== 'undefined') ? ('Age: ' + p.age) : '');
+                if (descEl) setText(descEl, p.description);
+                if (photoEl && p.photo) { photoEl.src = p.photo; }
+
+                var skillsEl = document.getElementById('skills-grid');
+                if (skillsEl && Array.isArray(cfg.skills)) {
+                    skillsEl.innerHTML = '';
+                    cfg.skills.forEach(function (s) {
+                        var li = create('li', 'skill');
+                        var img = create('img');
+                        img.src = s.icon; img.alt = s.name; img.width = 22; img.height = 22; img.loading = 'lazy';
+                        var span = create('span'); setText(span, s.name);
+                        li.appendChild(img); li.appendChild(span);
+                        skillsEl.appendChild(li);
+                    });
+                }
+
+                var socialEl = document.getElementById('social-grid');
+                if (socialEl && Array.isArray(cfg.socials)) {
+                    socialEl.innerHTML = '';
+                    cfg.socials.forEach(function (s) {
+                        var a = create('a', 'social box');
+                        a.href = s.href; a.target = '_blank'; a.rel = 'noreferrer noopener';
+                        var img = create('img'); img.src = s.icon; img.alt = s.name; img.width = 20; img.height = 20; img.loading = 'lazy';
+                        var span = create('span'); setText(span, s.name);
+                        a.appendChild(img); a.appendChild(span);
+                        socialEl.appendChild(a);
+                    });
+                }
+
+                var serverEl = document.getElementById('server-list');
+                if (serverEl && Array.isArray(cfg.servers)) {
+                    serverEl.innerHTML = '';
+                    cfg.servers.forEach(function (s) {
+                        var a = create('a', 'server box');
+                        a.href = s.href; a.target = '_blank'; a.rel = 'noreferrer noopener';
+                        var img = create('img'); img.className = 'server-logo'; img.src = s.logo; img.alt = s.name; img.width = 96; img.height = 96; img.loading = 'lazy';
+                        var info = create('div', 'server-info');
+                        var name = create('div', 'server-name'); setText(name, s.name);
+                        var desc = create('div', 'server-desc'); setText(desc, s.desc);
+                        info.appendChild(name); info.appendChild(desc);
+                        a.appendChild(img); a.appendChild(info);
+                        serverEl.appendChild(a);
+                    });
+                }
+            }
+
+            fetch('cfg.json').then(function (r) {
+                if (!r.ok) throw new Error('Failed to load cfg.json');
+                return r.json();
+            }).then(function (cfg) {
+                render(cfg);
+            }).catch(function (e) {
+                console.warn('Config load error:', e);
+            });
+        })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        (function () {
+            if (!window.particlesJS) return;
+            particlesJS("particles-js", {
+                particles: {
+                    number: { value: 40, density: { enable: true, value_area: 900 } },
+                    color: { value: "#ffffff" },
+                    opacity: { value: 0.1, random: false, anim: { enable: false } },
+                    size: { value: 2, random: true },
+                    line_linked: { enable: true, distance: 160, color: "#ffffff", opacity: 0.05, width: 1 },
+                    move: { enable: true, speed: 0.4, direction: "none", out_mode: "out" },
+                    shape: { type: "circle" }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: { onhover: { enable: false, mode: "repulse" }, resize: true },
+                    modes: { repulse: { distance: 80, duration: 0.2 } }
+                },
+                retina_detect: true
+            });
+        })();
+    </script>
+</body>
+</html>

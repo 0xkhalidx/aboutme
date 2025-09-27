@@ -1,0 +1,37 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "city": "Your City",
+    "age": 20,
+    "photo": "https://avatars.githubusercontent.com/u/9919?v=4",
+    "description": "Short description about you. Passionate web developer focused on modern UI and performance."
+  },
+  "skills": [
+    { "name": "HTML", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { "name": "CSS", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { "name": "JavaScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { "name": "React", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { "name": "Node.js", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { "name": "Python", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { "name": "TypeScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { "name": "Tailwind", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
+    { "name": "Express", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+    { "name": "MongoDB", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { "name": "Git", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" }
+  ],
+  "socials": [
+    { "name": "Discord", "href": "https://discord.com/users/000000000000000000", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/discordjs/discordjs-original.svg" },
+    { "name": "Instagram", "href": "https://www.instagram.com/", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/instagram/instagram-original.svg" },
+    { "name": "TikTok", "href": "https://www.tiktok.com/", "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" },
+    { "name": "Email", "href": "mailto:you@example.com", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" }
+  ],
+  "servers": [
+    {
+      "name": "FiveM RP Server",
+      "desc": "Roleplay • Always Online",
+      "href": "https://fivem.net/",
+      "logo": "https://cdn.discordapp.com/icons/1401278987837378692/1aae51329793ef8b1568f5e90f209d45.png?size=256"
+    }
+  ]
+}
+
